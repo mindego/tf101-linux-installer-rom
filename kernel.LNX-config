@@ -1,0 +1,2 @@
+NAME=
+CMDLINE=nvmem=128M@384M mem=1024M@0M vmalloc=128M gpt video=tegrafb console=tty0 usbcore.oldscheme_first=1 lp0_vec=8192@0x1fbed000 root=/dev/mmcblk0p7 bind=/linuxroot rw quiet splash

@@ -1,0 +1,34 @@
+#!/sbin/busybox sh
+echo Starting..
+# initramfs pre-boot init script
+
+echo Mounting...
+# Mount the /proc and /sys filesystems
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t tmpfs none /dev
+
+# Something (what?) needs a few cycles here
+sleep 1
+
+# Suppressing some annoying messages
+echo 0 >/proc/sys/kernel/hung_task_timeout_secs 
+
+echo Creating devices
+# Populate /dev
+/sbin/busybox mdev -s
+
+echo Installing...
+/sbin/busybox sh /installer.sh
+echo $name installed. Switching to console..
+
+/sbin/busybox sh -i </dev/console >/dev/console 2>&1
+# Clean up
+umount /proc
+umount /sys
+umount /dev
+
+# Transfer root to SDcard
+
+echo Rebooting...
+sleep 10
