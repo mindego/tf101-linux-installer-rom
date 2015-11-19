@@ -1,0 +1,1 @@
+dd if=./installer of=/dev/block/mmcblk0p4

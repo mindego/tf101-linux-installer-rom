@@ -1,5 +1,9 @@
-# MAGICSTRING=30ea1a413af7be981c355b3b5e27bc1f
+# This is a second-stage installer script.
+# Please do not delete following line:
+# MAGICSTRING=136f5e3b2b12c40cea97abe7c9bff368
 # This is a "failsafe" method to detect rootfs installers
+# By the way, that is md5sum of "This is a linux installer for TF101"
+
 
 NAME="Ubuntu 15.10"
 TARBALL_DEVICE=/dev/mmcblk1p1
@@ -15,8 +19,9 @@ echo -e "Installing $NAME to $INSTALL_DIRECTORY on $INSTALL_DEVICE from $TARBALL
 echo Mounting data partition...
 mount -t ext4 -o noatime,nodiratime,errors=panic $INSTALL_DEVICE /mnt/root
 
-echo Mounting sdcard...
-mount $TARBALL_DEVICE /mnt/sdcard
+# echo Mounting sdcard...
+# already mounted in main installer script
+# mount $TARBALL_DEVICE /mnt/sdcard
 
 echo Creating rootfs directories...
 mkdir -p /mnt/root/$INSTALL_DIRECTORY
