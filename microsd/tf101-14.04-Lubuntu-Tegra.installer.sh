@@ -4,28 +4,16 @@
 # This is a "failsafe" method to detect rootfs installers
 # By the way, that is md5sum of "This is a linux installer for TF101"
 
-# Rootfs name
-NAME="Ubuntu 15.10"
-# Device to install rootfs FROM. mmcblk1p1 is TF101 microsd card
+NAME="Lubuntu 14.04"
 TARBALL_DEVICE=/dev/mmcblk1p1
-# Name of rootfs archive
-TARBALL=wily.mate.tar.gz
-# Set this if rootfs needed installation of additional software, such as kernel modules or firmware
-#ADDON_TARBALL=some.tar.gz
-# Path to install. This is a path _inside_ new rootfs
-#ADDON_TARBALL_INSTALL_DIRECTORY
-# Name of kernel+initrd blob file
-KERNEL=kernel.blob
-# Set this if kernel blob is in .zip archive (such as Jrohwer's rootbind kernel)
-#KERNELZIP=Ubuntu-3.1.10-15-rootbind-oc1.5.zip 
-# Device to install rootfs TO. This is "data" partition of TF101
+TARBALL=tf101-14.04-Lubuntu-Tegra-armaf.tar.gz
+KERNEL=blob
+KERNELZIP=Ubuntu-3.1.10-15-rootbind-oc1.5.zip
 INSTALL_DEVICE=/dev/mmcblk0p7
-# Directory to keep rootfs in. It is inside ROOTFS_DIRECTORY, so it is possible to keep several linux installation and switch between them by changing "linuxroot" symlink
-INSTALL_DIRECTORY=ubuntu.wily
-# Directory to keep all rootfss in. It is on INSTALL_DEVICE.
+INSTALL_DIRECTORY=lubuntu.14.04
 ROOTFS_DIRECTORY=linux.root
-# This is symlink for main rootfs, used by default
 SYMLINK_ROOT=linuxroot
+
 
 echo -e "Installing $NAME to $ROOTFS_DIRECTORY/$INSTALL_DIRECTORY on $INSTALL_DEVICE from $TARBALL image on $TARBALL_DEVICE"
 
@@ -50,7 +38,7 @@ then
     #tar -pxvzf /mnt/sdcard/$TARBALL
     bar -n /mnt/sdcard/$TARBALL | tar -pxzf -
 else
-    echo No rootfs for install
+    echo No rootfs for install.
 fi
 
 echo Flashing kernel blob...

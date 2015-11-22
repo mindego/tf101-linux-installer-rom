@@ -19,7 +19,8 @@ for SELECTED_INSTALLER in $INSTALLERS
 	echo [$COUNT] `basename $SELECTED_INSTALLER`
     done
 
-unset SELECTED_INSTALLER
+if [ "$COUNT" -gt "1" ]; then unset SELECTED_INSTALLER;fi
+
 while [ -z "$SELECTED_INSTALLER" ]
 do 
 
@@ -38,5 +39,8 @@ if [ "$INSTALLER" -gt "$COUNT" ]; then echo "Please use one of number above.";un
 if [ ! -z "$INSTALLER" ]; then SELECTED_INSTALLER=`echo $INSTALLERS|cut -f $INSTALLER -d " "`;fi
 
 done
+echo Creating of copy of selected installer...
+cp $SELECTED_INSTALLER /tmp/installer.sh
+
 echo Executing second-stage linux installer...
-/sbin/busybox sh $SELECTED_INSTALLER
+/sbin/busybox sh /tmp/installer.sh

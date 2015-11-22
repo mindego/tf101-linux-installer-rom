@@ -16,19 +16,20 @@ echo 0 >/proc/sys/kernel/hung_task_timeout_secs
 
 echo Creating devices
 # Populate /dev
-/sbin/busybox mdev -s
+mdev -s
 
 echo Installing...
-/sbin/busybox sh /installer.sh
-echo $name installed. Switching to console..
+time sh /installer.sh
 
-/sbin/busybox sh -i </dev/console >/dev/console 2>&1
+echo "Switching to console. Press <Ctrl+D> to reboot"
+sh -i </dev/console >/dev/console 2>&1
+
 # Clean up
 umount /proc
 umount /sys
 umount /dev
 
-# Transfer root to SDcard
-
+# Rebooting
 echo Rebooting...
-sleep 10
+sleep 1
+reboot -f
